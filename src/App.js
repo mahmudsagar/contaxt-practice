@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Users from "./components/Users/Users";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Posts from "./components/Posts/Posts";
+// import PrivateRoute from "./components/PrivateRoute";
+import { useState } from "react";
+import PrivateRoute from "./components/PrivateRoute";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [loggedinUser, setLoggedinUser] = useState({});
+    console.log(loggedinUser);
+    return (
+        <>
+            <Router>
+                <Switch>
+                    <PrivateRoute path="/post">
+                        <Posts />
+                    </PrivateRoute>
+                </Switch>
+                <Route path="/login">
+                    <Users />
+                </Route>
+            </Router>
+        </>
+    );
 }
 
 export default App;
